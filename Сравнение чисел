@@ -1,0 +1,54 @@
+using System;
+using System.Globalization;
+
+namespace qwerty
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int firstDigit, secondDigit;
+            string sign = "";
+            bool isInt = false;
+
+            Console.Write("Введите первое число: ");
+            isInt = int.TryParse(Console.ReadLine(), out firstDigit);
+
+            while (!isInt)
+            {
+                Console.Write("\nВведите корректное число: ");
+                isInt = int.TryParse(Console.ReadLine(), out firstDigit);
+            }
+
+            Console.Write("Введите второе число: ");
+            isInt = int.TryParse(Console.ReadLine(), out secondDigit);
+
+            while (!isInt)
+            {
+                Console.Write("\nВведите корректное число: ");
+                isInt = int.TryParse(Console.ReadLine(), out secondDigit);
+            }
+
+            findSign(ref firstDigit, ref secondDigit, ref sign);
+
+            Console.WriteLine($"\nИтого: {firstDigit} {sign} {secondDigit}");
+            Console.ReadKey();
+        }
+
+        static void findSign(ref int firstDigit, ref int secondDigit, ref string sign)
+        {
+            if (firstDigit > secondDigit)
+            {
+                sign = ">";
+            }
+            else if (firstDigit < secondDigit)
+            {
+                sign = "<";
+            }
+            else
+            {
+                sign = "=";
+            }
+        }
+    }
+}
