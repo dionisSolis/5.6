@@ -1,53 +1,51 @@
 using System;
-using System.Globalization;
-
 namespace qwerty
 {
     class Program
     {
         static void Main(string[] args)
         {
-            int firstDigit, secondDigit;
-            string sign = "";
-            bool isInt = false;
+            int firstDigit, secondDigit, count = 1;
+            char sign;
 
-            Console.Write("Введите первое число: ");
-            isInt = int.TryParse(Console.ReadLine(), out firstDigit);
-
-            while (!isInt)
-            {
-                Console.Write("\nВведите корректное число: ");
-                isInt = int.TryParse(Console.ReadLine(), out firstDigit);
-            }
-
-            Console.Write("Введите второе число: ");
-            isInt = int.TryParse(Console.ReadLine(), out secondDigit);
-
-            while (!isInt)
-            {
-                Console.Write("\nВведите корректное число: ");
-                isInt = int.TryParse(Console.ReadLine(), out secondDigit);
-            }
-
-            findSign(ref firstDigit, ref secondDigit, ref sign);
-
+            firstDigit = EnterInt(ref count);
+            secondDigit = EnterInt(ref count);
+            sign = FindSign(firstDigit, secondDigit);
             Console.WriteLine($"\nИтого: {firstDigit} {sign} {secondDigit}");
             Console.ReadKey();
         }
 
-        static void findSign(ref int firstDigit, ref int secondDigit, ref string sign)
+        static int EnterInt(ref int count)
+        {
+            bool isDigit;
+            int digit;
+
+            Console.Write($"Введите {count}e число: ");
+            isDigit = int.TryParse(Console.ReadLine(), out digit);
+
+            while (!isDigit)
+            {
+                Console.Write("Введите корректное число: ");
+                isDigit = int.TryParse(Console.ReadLine(), out digit);
+            }
+
+            count += 1;
+            return digit;
+        }
+        
+        static char FindSign(int firstDigit, int secondDigit)
         {
             if (firstDigit > secondDigit)
             {
-                sign = ">";
+                return '>';
             }
             else if (firstDigit < secondDigit)
             {
-                sign = "<";
+                return '<';
             }
             else
             {
-                sign = "=";
+                return '=';
             }
         }
     }
